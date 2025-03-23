@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>OPXAH.web</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #333;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        max-width: 75rem; 
+        margin: 0 auto;
+        padding: 1.25rem; 
+    }
+    
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.25rem; 
+    }
+    
+    .navbar .logo {
+        font-size: 1.5rem; 
+    }
+    
+    .navbar ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        gap: 6.25rem; 
+    }
+    
+    .navbar ul li {
+        display: inline;
+    }
+    
+    .navbar ul li a {
+        color: #fff;
+        text-decoration: none;
+        position: relative;
+        padding-bottom: 0.3125rem; 
+    }
+
+    .navbar ul li a::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 0.125rem; 
+        background-color: goldenrod;
+        bottom: 0;
+        left: 0;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+
+    .navbar ul li a:hover::after {
+        transform: scaleX(1);
+    }
+    
+    .profile {
+        position: relative;
+        margin-top: 6.25rem; 
+    }
+    
+    .profile-left {
+        position: absolute;
+        top: -5rem; 
+        left: 0;
+        z-index: 1;
+    }
+    
+    .profile-left h1 {
+        font-size: 8.125rem;
+        margin-bottom: -1.25rem; 
+        position: relative;
+    }
+    
+    .profile-left h1::after {
+        content: '';
+        position: absolute;
+        bottom: 0.625rem; 
+        left: 0;
+        width: 28.125rem; 
+        height: 0.1875rem; 
+        background-color: goldenrod;
+    }
+
+    .profile-left p {
+        font-size: 1.2em;
+        margin: 1.25rem 0; 
+        padding: 0.3125rem; 
+        border-radius: 0.3125rem; 
+        max-width: 30rem; 
+    }
+
+    .artist-info {
+        position: absolute;
+        bottom: -40%;
+    }
+
+    .artist-info p {
+        color: white;
+        font-size: 0.8rem;
+        margin: 0.9375rem 0; 
+    }
+ 
+    .profile-right {
+        margin-left: 30%;
+        margin-top: -3%;
+        width: 70%;
+        text-align: center;
+        background-image: url("C:/Users/orhan/OneDrive/Desktop/OPXAH.web/image00022.jpg");
+        background-size: cover;
+        background-position: center;
+        min-height: 31.25rem; 
+        position: relative;
+    }
+
+    .social-icons {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem; 
+        position: absolute;
+        bottom: 5%;
+        right: 3%;
+        z-index: 2;
+    }
+
+    .social-icons a {
+        color: #ffffff;
+        font-size: 1.5rem; 
+        transition: color 0.3s ease;
+    }
+
+    .fa-instagram:hover { color: #e1306c; }
+    .fa-youtube:hover { color: #ff0000; }
+    .fa-spotify:hover { color: #1DB954; }
+    .fa-itunes:hover { color: #FB5BC5; }
+    .fa-music:hover { color: #00C7F2; }
+
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 100;
+    }
+
+    .hamburger span {
+        width: 2rem;
+        height: 0.25rem;
+        background-color: #fff;
+        margin: 0.25rem 0;
+        transition: all 0.3s ease;
+    }
+    .video-section {
+        min-height: 100vh;
+        background-color: #333;
+        padding: 4rem 0;
+    }
+
+    .video-container {
+        max-width: 75rem;
+        margin: 0 auto;
+        padding: 1.25rem;
+        position: relative;
+    }
+
+    .video-wrapper {
+        position: relative;
+        width: 50%;
+        height: 70vh;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .video-wrapper img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.3s ease;
+        z-index: 1;
+    }
+
+    .video-wrapper video {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+    }
+
+    .video-wrapper.playing img {
+        opacity: 0;
+    }
+
+    .video-title {
+        color: white;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .video-info p{
+        color: white;
+        font-size: 1rem;
+        margin-bottom: 5rem;
+        text-align: left;
+    }
+    
+    .song-details{
+        font-size: 0.8rem;
+        position: relative;
+        margin-left: 42rem;
+        margin-top: -32rem;
+    }
+
+        .song-details p1 {
+            font-size: 0.8rem;
+            position: absolute;
+            margin-left: 12rem;
+            margin-top: -22.5rem;
+        }
+
+        .song-details p2 {
+            font-size: 0.8rem;
+            position: absolute;
+            margin-left: 24rem;
+            margin-top: -23.5rem;
+        }
+
+        .contact-container {
+            background-color: rgba(0, 0, 0, 0.3); 
+            color: #ddd; 
+            padding: 4rem;
+            width: 90%;
+            margin: 0 auto;
+            margin-top: 6rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+            .contact-container h2 {
+                color: white;
+                font-size: 2.5rem;
+                margin-bottom: 5rem;
+                text-align: center;
+            }   
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+            .form-group label {
+                display: block;
+                color: #ccc; 
+            }
+
+            .form-group input,
+            .form-group textarea {
+                width: 98%;
+                padding: 1.5vh;
+                border: 1px solid #555; 
+                background-color: #444; 
+                color: #fff;
+                border-radius: 5px;
+            }
+
+            .form-group button {
+                width: 100%;
+                padding: 2vh;
+                background-color: #555; 
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+                .form-group button:hover {
+                    background-color: #777; 
+                }
+
+
+    @media (max-width: 768px) {
+        
+
+        .profile {
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .profile-left {
+            position: absolute;
+            top: -2rem;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .profile-left h1 {
+            font-size: 5rem; 
+            margin-bottom: -1rem;
+        }
+
+        .profile-left h1::after {
+            width: 19rem; 
+        }
+
+        .profile-left p {
+            font-size: 1rem;
+            max-width: 20rem;
+        }
+
+        .profile-right {
+            margin-left: 30%;
+            width: 70%;
+            min-height: 36rem;
+            margin-top: 0;
+        }
+
+        .artist-info {
+            position: absolute;
+            bottom: -40%;
+            left: 0;
+        }
+
+        .artist-info p {
+            font-size: 0.6rem;
+            margin: 0.5rem 0;
+        }
+
+        .social-icons {
+            right: 5%;
+            bottom: 5%;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            font-size: 1.2rem;
+        }
+
+        .video-wrapper {
+            height: 60vh;
+            width: 100%;
+        }
+
+        .song-details {
+            font-size: 0.6rem;
+            position: relative;
+            margin-left: 1rem;
+            margin-top: 0;
+        }
+
+            .song-details p1 {
+                font-size: 0.6rem;
+                position: absolute;
+                margin-left: 10rem;
+                margin-top: -17.4rem;
+            }
+
+            .song-details p2 {
+                font-size: 0.6rem;
+                position: absolute;
+                margin-left: 20rem;
+                margin-top: -18.2rem;
+            }
+
+        .contact-container {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #ddd;
+            padding: 4rem;
+            width: 78%;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+            .form-group input,
+            .form-group textarea {
+                width: 96.5%;
+                padding: 1.5vh;
+                border: 1px solid #555;
+                background-color: #444;
+                color: #fff;
+                border-radius: 5px;
+            }
+
+    }
+
+    @media (max-width: 480px) {
+
+        .hamburger {
+            display: flex;
+        }
+
+        .navbar ul {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(51, 51, 51, 0.95);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            z-index: 90;
+        }
+
+        .navbar ul.active {
+            display: flex;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(0.5rem, 0.5rem);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(0.5rem, -0.5rem);
+        }
+
+        .profile-left {
+            position: absolute;
+            top: -1rem;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .profile-left h1 {
+            font-size: 4rem;
+        }
+
+        .profile-left h1::after {
+            width: 15rem;
+        }
+
+        .profile-right {
+            margin-left: 25%;
+            background-position: 40%;
+            width: 75%;
+        }
+
+        .social-icons {
+            right: 3%;
+            bottom: 3%;
+            gap: 0.8rem;
+        }
+
+        .song-details p1 {
+            font-size: 0.6rem;
+            position: absolute;
+            margin-left: 8rem;
+            margin-top: -17.4rem;
+        }
+
+        .song-details p2 {
+            font-size: 0.6rem;
+            position: absolute;
+            margin-left: 16rem;
+            margin-top: -18.2rem;
+        }
+
+        .contact-container {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #ddd;
+            padding: 4rem;
+            width: 65%;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 92%;
+            padding: 1.5vh;
+            border: 1px solid #555;
+            background-color: #444;
+            color: #fff;
+            border-radius: 5px;
+        }
+    }
+
+    @media (max-width: 360px) {
+
+        .profile-left {
+            position: absolute;
+            top: 0rem;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .profile-left h1 {
+            font-size: 3rem;
+        }
+
+        .profile-left h1::after {
+            width: 11rem;
+        }
+
+        .profile-right {
+            margin-left: 20%;
+            background-position: 40%;
+            width: 80%;
+        }
+
+        .song-details {
+            font-size: 0.5rem;
+            position: relative;
+            margin-left: 1rem;
+            margin-top: 0;
+        }
+
+            .song-details p1 {
+                font-size: 0.5rem;
+                position: absolute;
+                margin-left: 6.5rem;
+                margin-top: -13.7rem;
+            }
+
+            .song-details p2 {
+                font-size: 0.5rem;
+                position: absolute;
+                margin-left: 13rem;
+                margin-top: -14.3rem;
+            }
+
+        .contact-container {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #ddd;
+            padding: 4rem;
+            width: 60%;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 90%;
+            padding: 1.5vh;
+            border: 1px solid #555;
+            background-color: #444;
+            color: #fff;
+            border-radius: 5px;
+        }
+    }
+    
+    </style>
+</head>
+<body>
+    <div class="container" id="artist">
+        <nav class="navbar">
+            <div class="logo">orнanmusic</div>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul>
+                <li><a href="#artist">Artist</a></li>
+                <li><a href="#songs">Songs</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="profile">
+            <div class="profile-left">
+                <h1>OPXAH</h1>
+                <p>OPXAH, or Orhan Ferdi Memish. Is a turkish producer, songwriter and singer.</p>
+
+                <div class="artist-info">
+                    <p>Home Town: Berlin, Germany</p>
+                    <p>Born: 23 Sep 2004</p>
+                    <p>Genre: Arabesque/Pop</p>
+                </div>
+            </div>
+            <div class="profile-right">
+                <div class="social-icons">
+
+                    <a href="https://instagram.com/deinprofil" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                    <a href="https://youtube.com/deinkanal" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+
+                    <a href="https://open.spotify.com/artist/deinprofil" target="_blank">
+                        <i class="fab fa-spotify"></i>
+                    </a>
+
+                    <a href="https://music.apple.com/artist/deinprofil" target="_blank">
+                        <i class="fab fa-itunes"></i>
+                    </a>
+
+                    <a href="https://deezer.com/artist/deinprofil" target="_blank">
+                        <i class="fas fa-music"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="video-section" id="songs">
+        <div class="video-container">
+            <h2 class="video-title">Top Songs</h2>
+            <p class="video-info">ⓘ<br />click, or hover the mouse to play the song</p>
+            <div class="video-wrapper">
+                <img src="C:\Users\orhan\OneDrive\Desktop\OPXAH.web\image00006.png" alt="Video Thumbnail">
+                <video loop>
+                    <source src="C:\Users\orhan\OneDrive\Desktop\OPXAH.web\OPXAH _ AYKIZIM 2025.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="song-details">
+                <h3>OPXAH - AYKIZIM (2024)</h3>
+                <p><strong>Music & Text:</strong> Orhan Ferdi Memish</p>
+                <br>
+                <h4>Lyrics:</h4>
+                <p>
+                    Ah ay yüzlüm<br>
+                    Ah yahşı sözlüm<br>
+                    Benden gitme<br>
+                    Neyler bu gönlüm<br>
+                    <br>
+                    Bu gece dolunay var bende<br>
+                    Kafamda dönen sorular<br>
+                    Ben kalamam bu yerde <br>
+                    Kalbimde aşkın var<br>
+                    <br>
+                    Yanar yanar içimde<br>
+                    Orda bir sen var<br>
+                    Var elbet elbet<br>
+                    Fani bi son var<br>
+                    <br>
+                    Gel bana <br>
+                    Benim ay ışığım <br>
+                    Karanlıklarda<br>
+                    Yanlızım…<br>
+                    <br>
+                    Ah ay yüzlüm<br>
+                    Ah yahşı sözlüm<br>
+                    Benden gitme<br>
+                    Neyler bu gönlüm<br>
+                </p>
+                <p1>
+                    Ah ay gözlüm<br>
+                    Ah yahşı sözlüm<br>
+                    Benden gitme<br>
+                    Neyler bu gönlüm<br>
+                    <br>
+                    Ah Aykızım<br>
+                    Bir işik gönder bana<br>
+                    Geceler boyu<br />
+                    beklediğim anları<br>
+                    Unutmak kolay değil<br>
+                    O bütün anıları<br>
+                    Gözümden yaşları<br>
+                    <br>
+                    Gel bana <br>
+                    Benim ay ışığım <br>
+                    Karanlıklarda<br>
+                    Yanlızım…<br>
+                </p1>
+                <p2>
+                    <br>
+                    Ah ay yüzlüm<br>
+                    Ah yahşı sözlüm<br>
+                    Sen Benden gitme<br>
+                    Neyler bu gönlüm<br>
+                    <br>
+                    Ah ay gözlüm<br>
+                    Ah yahşı sözlüm<br>
+                    Benden gitme<br>
+                    Neyler bu gönlüm<br>
+                </p2>
+                <h3>For more Songs, please check my Digital music Platforms.</h3>
+            </div>
+        </div>
+    </div>
+    <div class="video-container">
+        <p class="video-info">ⓘ<br />click, or hover the mouse to play the song</p>
+        <div class="video-wrapper">
+            <img src="C:\Users\orhan\OneDrive\Desktop\OPXAH.web\image00004.jpg" alt="Video Thumbnail">
+            <video loop>
+                <source src="C:\Users\orhan\OneDrive\Desktop\OPXAH.web\GUNES 2.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="song-details">
+            <h3>OPXAH - GÜNES (2023)</h3>
+            <p><strong>Music & Text:</strong> Orhan Ferdi Memish</p>
+            <br>
+            <h4>Lyrics:</h4>
+            <p>
+                Ah o gözleri, sanki manzara<br>
+                Deniz mavisiyle, yaz akşamında<br>
+                Hadi gel yanıma, durma uzaklarda<br>
+                Güneş'im ol sen, en karanlığımda<br>
+                <br>
+                Güneş gibi yaktı gönlümü<br>
+                O bakışı aldı götürdu<br>
+                Bendeki Aşkı gördümü<br>
+                Gülüşü beni öldürdü<br>
+                <br>
+                Güneş gibi yaktı gönlümü<br>
+                O bakışı aldı götürdu<br>
+                Bendeki Aşkı gördümü<br>
+                Gülüşü beni öldürdü<br>
+                <br>
+                Güneş gibi yaktı gönlümü<br>
+                <br>
+                Güneş gibi yaktı gönlümü<br>
+                <br>
+                Güneş gibi yaktı gönlümü<br>
+                <br />
+                Güneş gibi yaktı gönlümü<br>
+                <br />
+                <h3>For more Songs, please check my Digital music Platforms.</h3>
+</div>
+    </div>
+    <div class="contact-container" id="contact">
+        <h2>Contact</h2>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-Mail:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit">Senden</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        //BILD WECHSEL
+        const images = [
+            'C:/Users/orhan/OneDrive/Desktop/OPXAH.web/image00022.jpg',
+            'C:/Users/orhan/OneDrive/Desktop/OPXAH.web/image00009.jpg',
+        ];
+
+        let currentImageIndex = 0;
+        const profileRight = document.querySelector('.profile-right');
+
+        function changeBackground() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            profileRight.style.backgroundImage = `url(${images[currentImageIndex]})`;
+        }
+
+        setInterval(changeBackground, 10000);
+
+        //HAMBURGER
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.navbar ul');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.navbar ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+        // VIDEO
+        const videoWrappers = document.querySelectorAll('.video-wrapper');
+
+        videoWrappers.forEach(wrapper => {
+            const video = wrapper.querySelector('video');
+
+            // Maus
+            wrapper.addEventListener('mouseenter', () => {
+                video.play();
+                wrapper.classList.add('playing');
+            });
+
+            wrapper.addEventListener('mouseleave', () => {
+                video.pause();
+                wrapper.classList.remove('playing');
+            });
+
+            // Click
+            wrapper.addEventListener('click', () => {
+                if (video.paused) {
+                    video.play();
+                    wrapper.classList.add('playing');
+                } else {
+                    video.pause();
+                    wrapper.classList.remove('playing');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
